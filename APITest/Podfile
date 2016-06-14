@@ -1,0 +1,8 @@
+project '/Users/James/Desktop/xcodeProjects/APITest/APITest.xcodeproj'
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+target 'APITest' do
+pod 'Alamofire', '~> 3.4'
+end
