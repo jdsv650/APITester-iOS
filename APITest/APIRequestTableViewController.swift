@@ -185,6 +185,22 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
         
         return 80
     }
+    
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        switch section
+        {
+        case 0:
+            return "URL"
+        case 1:
+            return "Method"
+        case 2:
+            return "Parameters"
+        default:
+            return ""
+        }
+    }
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

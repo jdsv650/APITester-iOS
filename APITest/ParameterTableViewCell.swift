@@ -10,7 +10,6 @@ import UIKit
 
 class ParameterTableViewCell: UITableViewCell {
 
-  
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var value: UITextField!
     

@@ -2,7 +2,7 @@
 //  URLTableViewCell.swift
 //  APITest
 //
-//  Created by James on 6/12/16.
+//  Created by James on 6/13/16.
 //  Copyright © 2016 James. All rights reserved.
 //
 
@@ -11,8 +11,6 @@ import UIKit
 class URLTableViewCell: UITableViewCell {
 
     @IBOutlet weak var UrlTF: UITextField!
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -14,9 +14,8 @@
 		1A7A58D91D0CDBF00061B939 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 1A7A58D81D0CDBF00061B939 /* Podfile */; };
 		1A7A58DB1D0D980E0061B939 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A58DA1D0D980E0061B939 /* ResultsTableViewController.swift */; };
 		1A7A58DD1D0E01580061B939 /* ParameterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A58DC1D0E01580061B939 /* ParameterTableViewCell.swift */; };
-		1A90DFC91D0E4ED10024611E /* URLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A90DFC81D0E4ED10024611E /* URLTableViewCell.swift */; };
-		1A90DFCB1D0E4FA70024611E /* MethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A90DFCA1D0E4FA70024611E /* MethodTableViewCell.swift */; };
 		1A90DFCD1D0E50770024611E /* APIRequestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A90DFCC1D0E50770024611E /* APIRequestTableViewController.swift */; };
+		1A90DFCF1D0FA6660024611E /* URLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A90DFCE1D0FA6660024611E /* URLTableViewCell.swift */; };
 		513BDDD10DEB4DADAB161ABB /* Pods_APITest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A21B50C94699947F7F2493 /* Pods_APITest.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,9 +29,8 @@
 		1A7A58D81D0CDBF00061B939 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		1A7A58DA1D0D980E0061B939 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 		1A7A58DC1D0E01580061B939 /* ParameterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterTableViewCell.swift; sourceTree = "<group>"; };
-		1A90DFC81D0E4ED10024611E /* URLTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTableViewCell.swift; sourceTree = "<group>"; };
-		1A90DFCA1D0E4FA70024611E /* MethodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MethodTableViewCell.swift; sourceTree = "<group>"; };
 		1A90DFCC1D0E50770024611E /* APIRequestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestTableViewController.swift; sourceTree = "<group>"; };
+		1A90DFCE1D0FA6660024611E /* URLTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTableViewCell.swift; sourceTree = "<group>"; };
 		B5A21B50C94699947F7F2493 /* Pods_APITest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_APITest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6F344B3D203DA5B680063B /* Pods-APITest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APITest.release.xcconfig"; path = "APITest/Pods/Target Support Files/Pods-APITest/Pods-APITest.release.xcconfig"; sourceTree = "<group>"; };
 		F2E9ADE469B15BB5F8B618B7 /* Pods-APITest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APITest.debug.xcconfig"; path = "APITest/Pods/Target Support Files/Pods-APITest/Pods-APITest.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,8 +86,7 @@
 				1A7A58CB1D0C896A0061B939 /* LaunchScreen.storyboard */,
 				1A7A58CE1D0C896A0061B939 /* Info.plist */,
 				1A7A58D81D0CDBF00061B939 /* Podfile */,
-				1A90DFC81D0E4ED10024611E /* URLTableViewCell.swift */,
-				1A90DFCA1D0E4FA70024611E /* MethodTableViewCell.swift */,
+				1A90DFCE1D0FA6660024611E /* URLTableViewCell.swift */,
 			);
 			path = APITest;
 			sourceTree = "<group>";
@@ -226,9 +223,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A90DFC91D0E4ED10024611E /* URLTableViewCell.swift in Sources */,
+				1A90DFCF1D0FA6660024611E /* URLTableViewCell.swift in Sources */,
 				1A7A58DB1D0D980E0061B939 /* ResultsTableViewController.swift in Sources */,
-				1A90DFCB1D0E4FA70024611E /* MethodTableViewCell.swift in Sources */,
 				1A90DFCD1D0E50770024611E /* APIRequestTableViewController.swift in Sources */,
 				1A7A58C31D0C896A0061B939 /* AppDelegate.swift in Sources */,
 				1A7A58DD1D0E01580061B939 /* ParameterTableViewCell.swift in Sources */,
