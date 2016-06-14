@@ -38,11 +38,42 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
     
     @IBAction func addPressed(sender: UIBarButtonItem)
     {
-        names.append("")
-        values.append("")
-        tableView.reloadData()
+        
+        let alertVC = UIAlertController(title: "Add Parameter", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+      
+        alertVC.addTextFieldWithConfigurationHandler { (textfield) in
+            textfield.placeholder = "Name"
+        }
+        
+        alertVC.addTextFieldWithConfigurationHandler { (textfield) in
+            textfield.placeholder = "Value"
+        }
+        
+        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) in self.addParameter(alertVC) })
+        alertVC.addAction(action)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        alertVC.addAction(cancel)
+        
+        presentViewController(alertVC, animated: true, completion: nil)
         
     }
+    
+    
+    func addParameter(alertController :UIAlertController)
+    {
+        if let name = alertController.textFields![0].text
+        {
+            names.append(name)
+        }
+        if let value = alertController.textFields![1].text
+        {
+            values.append(value)
+        }
+        
+        tableView.reloadData()
+    }
+    
     
     
     @IBAction func submitPressed(sender: UIButton) {
@@ -219,9 +250,10 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
         
         if indexPath.section == 2
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("DynamicCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("DynamicCell", forIndexPath: indexPath) as! ParameterTableViewCell
             
-            cell.textLabel?.text = names[indexPath.row]
+            cell.name.text = names[indexPath.row]
+            cell.value.text = values[indexPath.row]
             
             return cell
         }

@@ -10,8 +10,9 @@ import UIKit
 
 class ParameterTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var name: UITextField!
-    @IBOutlet weak var value: UITextField!
+
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var value: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
