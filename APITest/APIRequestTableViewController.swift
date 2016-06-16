@@ -20,10 +20,16 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
     var httpMethods = ["GET", "POST", "PUT", "DELETE"]
     var selectedMethod = Method.GET
     
+    // for building up request body name / value pairs
     var names = [String]()
     var values = [String]()
+    var params = [String : String]()
     
-
+    // for building up request header
+    var headerFields = [String]()
+    var headerValues = [String]()
+    var headerDict = [String : String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,10 +42,49 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
     }
     
     
-    @IBAction func addPressed(sender: UIBarButtonItem)
+    @IBAction func addHeaderPressed(sender: UIBarButtonItem)
     {
         
-        let alertVC = UIAlertController(title: "Add Parameter", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertVC = UIAlertController(title: "Request Header", message: "Add Field", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertVC.addTextFieldWithConfigurationHandler { (textfield) in
+            textfield.placeholder = "Field"
+        }
+        
+        alertVC.addTextFieldWithConfigurationHandler { (textfield) in
+            textfield.placeholder = "Value"
+        }
+        
+        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) in self.addHeaderField(alertVC) })
+        alertVC.addAction(action)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        alertVC.addAction(cancel)
+        
+        presentViewController(alertVC, animated: true, completion: nil)
+
+    }
+    
+    
+    func addHeaderField(alertController :UIAlertController)
+    {
+        if let field = alertController.textFields![0].text
+        {
+            headerFields.append(field)
+        }
+        if let value = alertController.textFields![1].text
+        {
+            headerValues.append(value)
+        }
+        
+        tableView.reloadData()
+    }
+    
+    @IBAction func addPressed(sender: UIBarButtonItem)
+    {
+       
+        
+        let alertVC = UIAlertController(title: "Request Body", message: "Add Parameter", preferredStyle: UIAlertControllerStyle.Alert)
       
         alertVC.addTextFieldWithConfigurationHandler { (textfield) in
             textfield.placeholder = "Name"
@@ -79,6 +124,17 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
     @IBAction func submitPressed(sender: UIButton) {
         
         urlAsString = (tableView.viewWithTag(100) as! UITextField).text!
+        
+        for (index, name) in names.enumerate()
+        {
+            params[name] = values[index]
+        }
+        
+        for (index, name) in headerFields.enumerate()
+        {
+            headerDict[name] = headerValues[index]
+        }
+        
         makeCall()
     }
     
@@ -119,8 +175,7 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
     func makeCall()
     {
         
-        
-        Alamofire.request(selectedMethod, urlAsString, parameters: nil, encoding: ParameterEncoding.JSON, headers: nil).responseJSON(options: NSJSONReadingOptions.MutableContainers)
+        Alamofire.request(selectedMethod, urlAsString, parameters: params, encoding: ParameterEncoding.JSON, headers: headerDict).responseJSON(options: NSJSONReadingOptions.MutableContainers)
         { (Response) in
             
             print(Response.request)
@@ -185,12 +240,17 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 4
+        return 5
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return the number of rows
+        
         if section == 2
+        {
+            return headerFields.count
+        }
+        if section == 3
         {
             return names.count
         }
@@ -211,7 +271,12 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
         
         if indexPath.section == 2
         {
-            return 100
+            return 110
+        }
+        
+        if indexPath.section == 3
+        {
+            return 110
         }
         
         return 80
@@ -225,9 +290,11 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
         case 0:
             return "URL"
         case 1:
-            return "Method"
+            return "HTTP Method"
         case 2:
-            return "Parameters"
+            return "Request Headers"
+        case 3:
+            return "Request Body"
         default:
             return ""
         }
@@ -250,6 +317,16 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
         
         if indexPath.section == 2
         {
+            let cell = tableView.dequeueReusableCellWithIdentifier("HeaderCell", forIndexPath: indexPath) as! HeaderTableViewCell
+            
+            cell.field.text = headerFields[indexPath.row]
+            cell.value.text = headerValues[indexPath.row]
+            
+            return cell
+        }
+        
+        if indexPath.section == 3
+        {
             let cell = tableView.dequeueReusableCellWithIdentifier("DynamicCell", forIndexPath: indexPath) as! ParameterTableViewCell
             
             cell.name.text = names[indexPath.row]
@@ -258,7 +335,7 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
             return cell
         }
         
-        if indexPath.section == 3
+        if indexPath.section == 4
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("SubmitCell", forIndexPath: indexPath)
             
@@ -276,9 +353,9 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
 
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         
-        if indexPath.section != 2 { return false }
+        // Allow delete on request header and request body params
+        if indexPath.section != 3 && indexPath.section != 2 { return false }
         
         return true
     }
@@ -287,9 +364,16 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            
-            names.removeAtIndex(indexPath.row)
-            values.removeAtIndex(indexPath.row)
+            if indexPath.section == 2
+            {
+                headerFields.removeAtIndex(indexPath.row)
+                headerValues.removeAtIndex(indexPath.row)
+            }
+            if indexPath.section == 3
+            {
+                names.removeAtIndex(indexPath.row)
+                values.removeAtIndex(indexPath.row)
+            }
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
