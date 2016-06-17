@@ -113,6 +113,34 @@
             </objects>
             <point key="canvasLocation" x="1745" y="54"/>
         </scene>
+        <!--Bookmarked Requests Table View Controller-->
+        <scene sceneID="jDA-SN-Prs">
+            <objects>
+                <tableViewController id="fb6-3E-Slm" customClass="BookmarkedRequestsTableViewController" customModule="APITest" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tqp-4f-5PX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookmarkedRequestCell" id="dAK-r9-Qji">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dAK-r9-Qji" id="hMt-nP-VNc">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fb6-3E-Slm" id="HfG-Py-2lm"/>
+                            <outlet property="delegate" destination="fb6-3E-Slm" id="mJK-J9-Sse"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Bv-48-cI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1062" y="-581"/>
+        </scene>
         <!--API Tester-->
         <scene sceneID="d3R-jy-x8E">
             <objects>
@@ -270,6 +298,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="API Tester" id="eSE-LD-G8d">
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="bookmarks" id="mCJ-sQ-yLt">
+                                <connections>
+                                    <segue destination="fb6-3E-Slm" kind="show" id="996-9b-G3d"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="save" id="j4g-k5-cJn">
+                                <connections>
+                                    <action selector="savePressed:" destination="RH2-2a-zQW" id="AMM-0b-Xe3"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem image="body.png" id="T05-2O-tiQ">
                                 <connections>

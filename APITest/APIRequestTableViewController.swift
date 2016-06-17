@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 class APIRequestTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-    
+    var requestStore = RequestStore.shared()
     
     var urlAsString = ""
     var response = ""
@@ -42,6 +42,44 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
     }
     
     
+    func getHtttpMethodAsString() -> String
+    {
+        if selectedMethod == Method.GET { return "GET" }
+        if selectedMethod == Method.POST { return "POST" }
+        if selectedMethod == Method.PUT { return "PUT" }
+        if selectedMethod == Method.DELETE { return "DELETE" }
+        
+        return "GET"
+    }
+    
+    
+    @IBAction func savePressed(sender: UIBarButtonItem)
+    {
+        let theRequest = HttpRequest()
+        
+        if let url = (tableView.viewWithTag(100) as! UITextField).text
+        {
+            theRequest.urlAsString = url
+        }
+        else { theRequest.urlAsString = "" }
+        
+        theRequest.httpMethod = getHtttpMethodAsString()
+        
+        for (index, name) in names.enumerate()
+        {
+            theRequest.requestBody[name] = values[index]
+        }
+        
+        for (index, name) in headerFields.enumerate()
+        {
+            theRequest.requestHeader[name] = headerValues[index]
+        }
+        
+        requestStore.createRequest(theRequest)
+        requestStore.save()
+    }
+    
+    
     @IBAction func addHeaderPressed(sender: UIBarButtonItem)
     {
         
@@ -59,6 +97,7 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
         alertVC.addAction(action)
         
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+      
         alertVC.addAction(cancel)
         
         presentViewController(alertVC, animated: true, completion: nil)
@@ -228,11 +267,16 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        let nextVC = segue.destinationViewController as! ResultsTableViewController
+        if segue.identifier == "responseSegue"
+        {
+            let nextVC = segue.destinationViewController as! ResultsTableViewController
         
-        nextVC.request = request
-        nextVC.response = response
-        nextVC.data = data
+            nextVC.request = request
+            nextVC.response = response
+            nextVC.data = data
+        }
+        
+        // else browse saved request
     }
     
 
