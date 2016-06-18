@@ -41,7 +41,7 @@ class RequestStore
         allRequests.append(theRequest)
     }
     
-    func getRequest(index:Int) -> HttpRequest {
+    func getRequest(index:Int) -> HttpRequest? {
         return allRequests[index]
     }
     

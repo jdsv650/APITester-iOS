@@ -1,18 +1,21 @@
 //
-//  MethodTableViewCell.swift
+//  BookmarkTableViewCell.swift
 //  APITest
 //
-//  Created by James on 6/12/16.
+//  Created by James on 6/18/16.
 //  Copyright © 2016 James. All rights reserved.
 //
 
 import UIKit
 
-class MethodTableViewCell: UITableViewCell {
+class BookmarkTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var methodPicker: UIPickerView!
+    @IBOutlet weak var bodylabel: UILabel!
+    @IBOutlet weak var headerslabel: UILabel!
+    @IBOutlet weak var methodlabel: UILabel!
+    @IBOutlet weak var urlLabel: UILabel!
     
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

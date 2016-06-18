@@ -8,8 +8,18 @@
 
 import UIKit
 
+// To notify delegate of selected request
+protocol BookmarkedRequestsDelegate :class
+{
+    func didSelectRequest(controller: BookmarkedRequestsTableViewController, httpRequest: HttpRequest)
+}
+
+
+
 class BookmarkedRequestsTableViewController: UITableViewController {
 
+    // declare the delegate
+    weak var delegate: BookmarkedRequestsDelegate? = nil
     
     var requestStore = RequestStore.shared()
     
@@ -35,16 +45,50 @@ class BookmarkedRequestsTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BookmarkedRequestCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("BookmarkedRequestCell", forIndexPath: indexPath) as! BookmarkTableViewCell
 
         // Configure the cell...
-    
-        // just grab the url for now
-        cell.textLabel?.text = requestStore.getRequest(indexPath.row).urlAsString
+
+        if let theRequest = requestStore.getRequest(indexPath.row)
+        {
+            cell.urlLabel.text = theRequest.urlAsString
+            cell.methodlabel.text = theRequest.httpMethod
+            
+            var requestAsString = ""
+            
+            for (field, value) in theRequest.requestHeader
+            {
+                requestAsString += field
+                requestAsString += " \(value)"
+            }
+            cell.headerslabel.text = requestAsString
+            
+            requestAsString = ""
+            for (name, value) in theRequest.requestBody
+            {
+                requestAsString += name
+                requestAsString += " \(value), "
+            }
+            
+            cell.bodylabel.text = requestAsString
+
+        }
+        
+       // cell.textLabel?.text = .urlAsString
 
         return cell
     }
  
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // call the delegate
+        if let theRequest = requestStore.getRequest(indexPath.row)
+        {
+            delegate?.didSelectRequest(self, httpRequest: theRequest)
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.

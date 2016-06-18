@@ -9,7 +9,8 @@
 import UIKit
 import Alamofire
 
-class APIRequestTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class APIRequestTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate , BookmarkedRequestsDelegate {
+
     var requestStore = RequestStore.shared()
     
     var urlAsString = ""
@@ -19,6 +20,10 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
     
     var httpMethods = ["GET", "POST", "PUT", "DELETE"]
     var selectedMethod = Method.GET
+    
+    // for return from bookmark
+    var selectedMethodAsString = "GET"
+    var selectedUrlAsString = ""
     
     // for building up request body name / value pairs
     var names = [String]()
@@ -41,6 +46,46 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    // MARK: BookmarkedRequestsDelegate - returning from selecting a saved request
+    func didSelectRequest(controller: BookmarkedRequestsTableViewController, httpRequest: HttpRequest) {
+        
+        selectedUrlAsString = httpRequest.urlAsString
+        selectedMethodAsString = httpRequest.httpMethod
+        
+        headerFields = []
+        headerValues = []
+        
+        for (field, value) in httpRequest.requestHeader
+        {
+            headerFields.append(field)
+            headerValues.append(value)
+        }
+        
+        names = []
+        values = []
+        
+        for (name, value) in httpRequest.requestBody
+        {
+            names.append(name)
+            values.append(value)
+        }
+    
+        tableView.reloadData()
+    }
+    
+    
+    func getHttpMethodFromString(methodAsString: String) -> Alamofire.Method
+    {
+        switch methodAsString
+        {
+            case "GET": return Alamofire.Method.GET
+            case "POST": return Alamofire.Method.POST
+            case "PUT": return Alamofire.Method.PUT
+            case "DELETE": return Alamofire.Method.DELETE
+            default: return Alamofire.Method.GET
+        }
+    }
+    
     
     func getHtttpMethodAsString() -> String
     {
@@ -50,6 +95,16 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
         if selectedMethod == Method.DELETE { return "DELETE" }
         
         return "GET"
+    }
+    
+    func getIndexOfSelectedMethod(selectedAsString: String) -> Int
+    {
+        for (index, value) in httpMethods.enumerate()
+        {
+            if value == selectedAsString { return index  }
+        }
+        
+        return 0   // default to GET
     }
     
     
@@ -208,6 +263,7 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
             selectedMethod = Method.GET
         }
     }
+    
 
     
     
@@ -275,6 +331,14 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
             nextVC.response = response
             nextVC.data = data
         }
+        else  // BookmarkedRequest VC
+        {
+            let nextVC = segue.destinationViewController as! BookmarkedRequestsTableViewController
+            
+            // set this vc as a delegate
+            nextVC.delegate = self
+        }
+        
         
         // else browse saved request
     }
@@ -349,14 +413,23 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
         
         if indexPath.section == 0
         {
-            return tableView.dequeueReusableCellWithIdentifier("URLCell", forIndexPath: indexPath)
+            let cell =  tableView.dequeueReusableCellWithIdentifier("URLCell", forIndexPath: indexPath) as! URLTableViewCell
+           
+            cell.UrlTF.text = selectedUrlAsString
+            
+            return cell
+            
         }
         
         if indexPath.section == 1
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("MethodCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("MethodCell", forIndexPath: indexPath) as! MethodTableViewCell
             
-          return cell
+            let selectedIndex = getIndexOfSelectedMethod(selectedMethodAsString)
+            
+            cell.methodPicker.selectRow(selectedIndex, inComponent: 0, animated: false)
+            
+            return cell
         }
         
         if indexPath.section == 2
