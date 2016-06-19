@@ -213,12 +213,24 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u28-TF-Vrz">
-                                            <rect key="frame" x="8" y="14" width="584" height="30"/>
+                                        <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u28-TF-Vrz">
+                                            <rect key="frame" x="8" y="15" width="584" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="lnx-tN-0im"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="urlTextDidChange:" destination="RH2-2a-zQW" eventType="editingChanged" id="0VC-Yv-fOg"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="u28-TF-Vrz" firstAttribute="centerY" secondItem="7nh-9D-7jc" secondAttribute="centerY" id="3aO-XB-XKo"/>
+                                        <constraint firstItem="u28-TF-Vrz" firstAttribute="centerX" secondItem="7nh-9D-7jc" secondAttribute="centerX" id="M0A-tZ-3bi"/>
+                                        <constraint firstItem="u28-TF-Vrz" firstAttribute="trailing" secondItem="7nh-9D-7jc" secondAttribute="trailingMargin" id="gf5-8M-JQF"/>
+                                        <constraint firstItem="u28-TF-Vrz" firstAttribute="leading" secondItem="7nh-9D-7jc" secondAttribute="leadingMargin" id="nD6-a6-8MQ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="UrlTF" destination="u28-TF-Vrz" id="q9D-Eg-Mkl"/>
@@ -231,14 +243,23 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qmA-U8-cYk">
-                                            <rect key="frame" x="8" y="0.0" width="584" height="78"/>
+                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qmA-U8-cYk">
+                                            <rect key="frame" x="8" y="6" width="584" height="78"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="78" id="Mde-G5-u3C"/>
+                                            </constraints>
                                             <connections>
                                                 <outlet property="dataSource" destination="RH2-2a-zQW" id="WYh-u1-8R2"/>
                                                 <outlet property="delegate" destination="RH2-2a-zQW" id="9n0-xa-Sd1"/>
                                             </connections>
                                         </pickerView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="qmA-U8-cYk" firstAttribute="trailing" secondItem="QRu-Pb-gBf" secondAttribute="trailingMargin" id="16p-Us-3w4"/>
+                                        <constraint firstItem="qmA-U8-cYk" firstAttribute="centerY" secondItem="QRu-Pb-gBf" secondAttribute="centerY" id="ceA-DP-TCK"/>
+                                        <constraint firstItem="qmA-U8-cYk" firstAttribute="centerX" secondItem="QRu-Pb-gBf" secondAttribute="centerX" id="jse-Dr-7fh"/>
+                                        <constraint firstItem="qmA-U8-cYk" firstAttribute="leading" secondItem="QRu-Pb-gBf" secondAttribute="leadingMargin" id="nKa-h3-y8r"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="methodPicker" destination="qmA-U8-cYk" id="eC2-Pz-efx"/>
@@ -339,15 +360,24 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sp-eL-2c7">
-                                            <rect key="frame" x="8" y="8" width="584" height="71"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sp-eL-2c7">
+                                            <rect key="frame" x="8" y="9" width="584" height="70"/>
                                             <color key="backgroundColor" red="0.16875823479999999" green="1" blue="0.043974736399999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="E7L-jR-0w6"/>
+                                            </constraints>
                                             <state key="normal" title="Submit"/>
                                             <connections>
                                                 <action selector="submitPressed:" destination="RH2-2a-zQW" eventType="touchUpInside" id="F7B-27-Vwe"/>
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="2sp-eL-2c7" firstAttribute="centerY" secondItem="yUs-WR-ATd" secondAttribute="centerY" id="9oc-ra-nNO"/>
+                                        <constraint firstItem="2sp-eL-2c7" firstAttribute="leading" secondItem="yUs-WR-ATd" secondAttribute="leadingMargin" id="d5g-at-Wz8"/>
+                                        <constraint firstItem="2sp-eL-2c7" firstAttribute="centerX" secondItem="yUs-WR-ATd" secondAttribute="centerX" id="pSi-fP-pJg"/>
+                                        <constraint firstItem="2sp-eL-2c7" firstAttribute="trailing" secondItem="yUs-WR-ATd" secondAttribute="trailingMargin" id="x5R-a7-Sjf"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -363,7 +393,7 @@
                                     <segue destination="fb6-3E-Slm" kind="show" id="996-9b-G3d"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="save" id="j4g-k5-cJn">
+                            <barButtonItem image="thumbdrive-7.png" id="j4g-k5-cJn">
                                 <connections>
                                     <action selector="savePressed:" destination="RH2-2a-zQW" id="AMM-0b-Xe3"/>
                                 </connections>
@@ -412,5 +442,6 @@
     <resources>
         <image name="body.png" width="29" height="30"/>
         <image name="header.png" width="29" height="30"/>
+        <image name="thumbdrive-7.png" width="30" height="30"/>
     </resources>
 </document>

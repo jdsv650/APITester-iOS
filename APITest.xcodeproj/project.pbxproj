@@ -15,6 +15,7 @@
 		1A0502C81D1374C400D73807 /* BookmarkedRequestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0502C71D1374C400D73807 /* BookmarkedRequestsTableViewController.swift */; };
 		1A0502CA1D15CA9B00D73807 /* BookmarkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0502C91D15CA9B00D73807 /* BookmarkTableViewCell.swift */; };
 		1A0502CC1D15D0DE00D73807 /* MethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0502CB1D15D0DE00D73807 /* MethodTableViewCell.swift */; };
+		1A0502D01D161E5300D73807 /* thumbdrive-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A0502CF1D161E5300D73807 /* thumbdrive-7.png */; };
 		1A7A58C31D0C896A0061B939 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A58C21D0C896A0061B939 /* AppDelegate.swift */; };
 		1A7A58C81D0C896A0061B939 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A7A58C61D0C896A0061B939 /* Main.storyboard */; };
 		1A7A58CA1D0C896A0061B939 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A7A58C91D0C896A0061B939 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		1A0502C71D1374C400D73807 /* BookmarkedRequestsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkedRequestsTableViewController.swift; sourceTree = "<group>"; };
 		1A0502C91D15CA9B00D73807 /* BookmarkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkTableViewCell.swift; sourceTree = "<group>"; };
 		1A0502CB1D15D0DE00D73807 /* MethodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MethodTableViewCell.swift; sourceTree = "<group>"; };
+		1A0502CF1D161E5300D73807 /* thumbdrive-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbdrive-7.png"; sourceTree = "<group>"; };
 		1A7A58BF1D0C89690061B939 /* APITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A7A58C21D0C896A0061B939 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A7A58C71D0C896A0061B939 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				1A7A58D81D0CDBF00061B939 /* Podfile */,
 				1A0502B91D1229D400D73807 /* header.png */,
 				1A0502BB1D1229FE00D73807 /* body.png */,
+				1A0502CF1D161E5300D73807 /* thumbdrive-7.png */,
 				1A0502C31D136ADD00D73807 /* RequestStore.swift */,
 			);
 			path = APITest;
@@ -194,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A7A58CD1D0C896A0061B939 /* LaunchScreen.storyboard in Resources */,
+				1A0502D01D161E5300D73807 /* thumbdrive-7.png in Resources */,
 				1A7A58CA1D0C896A0061B939 /* Assets.xcassets in Resources */,
 				1A7A58D91D0CDBF00061B939 /* Podfile in Resources */,
 				1A0502BC1D1229FE00D73807 /* body.png in Resources */,

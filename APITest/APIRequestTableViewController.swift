@@ -115,6 +115,7 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
         if let url = (tableView.viewWithTag(100) as! UITextField).text
         {
             theRequest.urlAsString = url
+            urlAsString = url
         }
         else { theRequest.urlAsString = "" }
         
@@ -249,6 +250,7 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         let selectedText = httpMethods[row]
+        selectedMethodAsString = httpMethods[row]
         
         switch selectedText {
         case "GET":
@@ -408,6 +410,10 @@ class APIRequestTableViewController: UITableViewController, UIPickerViewDataSour
         }
     }
 
+    @IBAction func urlTextDidChange(sender: UITextField) {
+        
+        selectedUrlAsString = sender.text!
+    }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
